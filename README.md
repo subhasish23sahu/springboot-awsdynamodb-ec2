@@ -14,54 +14,30 @@ This sample project demonstrates how to use AWS DynammoDB service with spring-bo
 
 pom.xml - add the following dependencies
 ````
- <!--JARs for AWS Dynamo DB-->
+    <!--JARs for AWS Dynamo DB-->
+        <dependency>
+            <groupId>com.amazonaws</groupId>
+            <artifactId>aws-java-sdk</artifactId>
+            <version>1.11.506</version>
+        </dependency>
         <dependency>
             <groupId>com.amazonaws</groupId>
             <artifactId>aws-java-sdk-dynamodb</artifactId>
-            <version>1.11.573</version>
+            <version>1.11.34</version>
         </dependency>
         <dependency>
             <groupId>com.github.derjust</groupId>
             <artifactId>spring-data-dynamodb</artifactId>
             <version>5.1.0</version>
         </dependency>
-        <!--JARs for AWS Dynamo DB-->
-        <dependency>
-            <groupId>com.google.code.gson</groupId>
-            <artifactId>gson</artifactId>
-            <version>2.8.5</version>
-        </dependency>
+    <!--JARs for AWS Dynamo DB-->
 ````
 
-Resources folder : add the bootstarp.yml properties for spring cloud aws see the following
+Resources folder : 
 ````
 resources
-    application.yml
-    application.local.yml
-    bootstrap.yml  ## it is used for aws cloud
-    bootstrap-local.yml  ## it is used by appliaction-local.yml
+    application.properties
 ````
-bootstrap.yml
-````
-aws:
-    secretsmanager:
-        name: tests
-cloud:
-    aws:
-        region:
-            static: us-east-1
-
-````
-
-
-
-
-# Run springboot in local environment
-
-````
-mvn clean spring-boot:run -Dspring-boot.run.profiles=local
-````
-Browser : http://localhost:8090/api/tests
 
 # deploy the jar file in EC2 AWS server
 
@@ -74,21 +50,11 @@ The server must install java 8 JDK ( Amazon Linux OS)
 sudo yum install java-1.8.0-openjdk
 ````
 
-suppose we put the jar file in /home/ec2-user/springboot_awsdynamodb-ec2.jar using WinSCP
+We will put the jar file in /home/ec2-user/springboot_awsdynamodb-ec2.jar using WinSCP
 
 ````
 cd /home/ec2-user
 java -jar springboot_awsdynamodb-ec2.jar
 
-
-````
-
-
-
-````
-curl http://54.152.47.242/:8090/api/tests
-{
-environment: "dev",
-}
 
 ````
